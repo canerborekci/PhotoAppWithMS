@@ -1,0 +1,15 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.update;
+
+import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.spring.stereotype.Aggregate;
+
+@Aggregate
+public class UpdateAccountTypeAggregate {
+	@AggregateIdentifier
+	private String accountTypeId;
+	private String accountName;
+	private double price;
+	private String description;
+	public UpdateAccountTypeAggregate() {
+	}
+}

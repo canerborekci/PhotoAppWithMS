@@ -1,0 +1,22 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.delete;
+
+import java.util.UUID;
+
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.spring.stereotype.Aggregate;
+
+@Aggregate
+public class DeleteAccountTypeAggregate {
+	@AggregateIdentifier
+	private String identifier=UUID.randomUUID().toString();
+	
+	private String accountTypeId;
+	
+	
+	@CommandHandler
+	public DeleteAccountTypeAggregate(DeleteAccountTypeCommand deleteAccountTypeCommand) {
+		
+	}
+	
+}

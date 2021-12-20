@@ -1,0 +1,40 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.create;
+
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.modelling.command.AggregateLifecycle;
+import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.beans.BeanUtils;
+@Aggregate
+public class CreateAccountTypeAggregate {
+	private String accountTypeId;
+	private String accountName;
+	private double price;
+	private String description;
+	
+	
+	public CreateAccountTypeAggregate() {
+		
+	}
+	@CommandHandler
+	public CreateAccountTypeAggregate(CreateAccountTypeCommand createAccountTypeCommand) {
+		//Validation
+		if(createAccountTypeCommand.getPrice()<0) {
+			throw new IllegalArgumentException("fiyat sıfırdan küçük olamaz");
+		}
+		
+		//Business
+		
+		//Eventfire
+		AccountTypeCreatedEvent accountTypeCreatedEvent = new AccountTypeCreatedEvent();
+		//modelmapper,builder, bean utils alternatifleri kullanılabilir.
+		BeanUtils.copyProperties(createAccountTypeCommand, accountTypeCreatedEvent);
+		AggregateLifecycle.apply(accountTypeCreatedEvent);
+	}
+	
+	
+	@EventSourcingHandler
+	public void on(AccountTypeCreatedEvent accountTypeCreatedEvent) {
+		
+	}
+}

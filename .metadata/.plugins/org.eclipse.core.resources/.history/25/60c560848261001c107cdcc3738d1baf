@@ -1,0 +1,8 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.update;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class AccountTypeUpdateEventsHandler {
+
+}

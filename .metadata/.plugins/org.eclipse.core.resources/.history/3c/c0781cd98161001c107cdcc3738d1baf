@@ -1,0 +1,32 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.update;
+
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateLifecycle;
+import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.beans.BeanUtils;
+
+import com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.create.AccountTypeCreatedEvent;
+import com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.create.CreateAccountTypeCommand;
+
+@Aggregate
+public class UpdateAccountTypeAggregate {
+	@AggregateIdentifier
+	private String accountTypeId;
+	private String accountName;
+	private double price;
+	private String description;
+	public UpdateAccountTypeAggregate() {
+	}
+	
+	@CommandHandler
+	public UpdateAccountTypeAggregate(UpdateAccountTypeCommand updateAccountTypeCommand) {
+		if(updateAccountTypeCommand.getPrice()<0) {
+			throw new IllegalArgumentException("fiyat sıfırdan küçük olamaz");
+		}
+		AccountTypeUpdatedEvent accountTypeUpdatedEvent = new AccountTypeUpdatedEvent();
+		BeanUtils.copyProperties(updateAccountTypeCommand, accountTypeUpdatedEvent);
+		AggregateLifecycle.apply(accountTypeUpdatedEvent);
+	}
+	
+}

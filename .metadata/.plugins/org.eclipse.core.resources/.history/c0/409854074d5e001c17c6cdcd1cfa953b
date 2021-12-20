@@ -1,0 +1,14 @@
+package com.appsdeveloperblog.photoapp.api.account.features.accountTypes.commands.create;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class CreateAccountTypeCommand {
+	
+	private final String accountTypeId;
+	private final String accountName;
+	private final double price;
+	private final String description;
+}
